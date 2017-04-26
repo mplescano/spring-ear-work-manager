@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-application xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-application"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/javaee_5.xsd http://xmlns.oracle.com/weblogic/weblogic-application
+	http://xmlns.oracle.com/weblogic/weblogic-application/1.2/weblogic-application.xsd">
+	
+	<!--weblogic-version:10.3.4-->
+	<wls:application-param>
+		<wls:param-name>webapp.encoding.default</wls:param-name>
+		<wls:param-value>UTF-8</wls:param-value>
+	</wls:application-param>
+	
+    <!-- http://www.torsten-horn.de/techdocs/jee-oracleweblogic.htm -->
+    <wls:prefer-application-packages>
+        <wls:package-name>org.slf4j.*</wls:package-name>
+        <wls:package-name>org.apache.commons.*</wls:package-name>
+    </wls:prefer-application-packages>
+
+
+    <!-- if not using prefer-application-resources you will get a warning like this: -->
+    <!-- Class path contains multiple SLF4J bindings -->
+    <!-- SLF4J: Found binding in [jar:file:/C:/wls1211/modules/org.slf4j.jdk14_1.6.1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class] -->
+    <wls:prefer-application-resources>
+        <wls:resource-name>org/slf4j/impl/StaticLoggerBinder.class</wls:resource-name>
+    </wls:prefer-application-resources>
+
+</wls:weblogic-application>

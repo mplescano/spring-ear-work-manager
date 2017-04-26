@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd 
+	http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.2/weblogic-web-app.xsd">
+	
+	<!-- <work-manager>
+		<name>fast_response_time</name>
+		<response-time-request-class>
+			<name>fast_response_time</name>
+			<goal-ms>2000</goal-ms>
+		</response-time-request-class>
+		<max-threads-constraint-name>j2ee_maxthreads</max-threads-constraint-name>
+	</work-manager>
+	
+	<work-manager>
+		<name>slow_response_time</name>
+		<max-threads-constraint-name>j2ee_maxthreads</max-threads-constraint-name>
+		<response-time-request-class>
+			<name>slow_response_time</name>
+			<goal-ms>5000</goal-ms>
+		</response-time-request-class>
+	</work-manager>-->
+	
+	<wls:work-manager>
+		<wls:name>slow-greeting-work-manager</wls:name>
+		<wls:min-threads-constraint>
+			<wls:name>min-thread-greeting</wls:name>
+			<wls:count>1</wls:count>
+		</wls:min-threads-constraint>
+		<wls:max-threads-constraint>
+			<wls:name>max-thread-greeting</wls:name>
+			<wls:count>5</wls:count>
+		</wls:max-threads-constraint>
+	</wls:work-manager>
+	
+</wls:weblogic-web-app>
