@@ -31,14 +31,16 @@ import com.mplescano.workmanager.config.root.BackEndConfig;
  *
  */
 public class SpringServletInitializer implements WebApplicationInitializer {
-	
+    
 	/**
 	 * The default servlet name. Can be customized by overriding {@link #getServletName}.
 	 */
 	public static final String DEFAULT_SERVLET_NAME = "dispatcher";
 
 	public void onStartup(ServletContext servletContext) throws ServletException {
+	    servletContext.setInitParameter(ContextLoader.LOCATOR_FACTORY_SELECTOR_PARAM, "classpath*:beanRefContext.xml");
 		servletContext.setInitParameter(ContextLoader.LOCATOR_FACTORY_KEY_PARAM, "ear.context");
+		//servletContext.setInitParameter(ContextLoader.CONFIG_LOCATION_PARAM, DEFAULT_CONFIG_LOCATION_PREFIX + DEFAULT_SERVLET_NAME + "-servlet" + DEFAULT_CONFIG_LOCATION_SUFFIX);
 		
 		this.registerContextLoaderListener(servletContext);
 		this.registerDispatcherServlet(servletContext);
@@ -52,13 +54,7 @@ public class SpringServletInitializer implements WebApplicationInitializer {
 	 */
 	protected void registerContextLoaderListener(ServletContext servletContext) {
 		WebApplicationContext rootAppContext = this.createRootApplicationContext();
-		if (rootAppContext != null) {
-			servletContext.addListener(new ContextLoaderListener(rootAppContext));
-		}
-		else {
-			servletContext.log("No ContextLoaderListener registered, as " +
-					"createRootApplicationContext() did not return an application context");
-		}
+		servletContext.addListener(new ContextLoaderListener(rootAppContext));
 	}
 
 	protected WebApplicationContext createRootApplicationContext()
@@ -126,9 +122,6 @@ public class SpringServletInitializer implements WebApplicationInitializer {
 				"getServletName() may not return empty or null");
 
 		WebApplicationContext servletAppContext = this.createServletApplicationContext();
-		Assert.notNull(servletAppContext,
-				"createServletApplicationContext() did not return an application " +
-						"context for servlet [" + servletName + "]");
 
 		DispatcherServlet dispatcherServlet = new DispatcherServlet(servletAppContext);
 
